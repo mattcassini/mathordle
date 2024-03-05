@@ -1,9 +1,9 @@
 # Vue Wordle
 
-[Live demo](https://vue-wordle.netlify.app/)
+[Live demo](http://octowordle.com)
 
 A Vue implementation of the [Wordle game](https://www.powerlanguage.co.uk/wordle/). This is just for fun and doesn't aim to 100% replicate the original.
 
-You can make your own Wordle and send it to friends by base64-encoding a word and include it as the URL query, e.g. https://vue-wordle.netlify.app/?YmxpbXA= (this will also allow words that are not in the dictionary.)
+This is a modified version of the game vue-wordle with an 8-letter word dictionary and allows 11 guesses. Forked from https://github.com/yyx990803/vue-wordle.
 
-This repository is open sourced for learning purposes only - the original creator(s) of Wordle own all applicable rights to the game itself.
+This repository is for education purposes only. All rights belong to the original creators.
