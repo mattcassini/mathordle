@@ -121,7 +121,7 @@ function completeRow() {
     })
 
     allowInput = false
-    if (currentRow.every((tile) => tile.state === LetterState.CORRECT || tile.state === LetterState.CORRECTDUPE)) {
+    if (currentRow.every((tile) => tile.state === LetterState.CORRECT || tile.state === LetterState.CORRECT)) {
       // yay!
       setTimeout(() => {
         grid = genResultGrid()
@@ -219,8 +219,8 @@ function genResultGrid() {
         <div
           :class="['back', tile.state]"
           :style="{
-            transitionDelay: `${index * 300}ms`,
-            animationDelay: `${index * 100}ms`
+            transitionDelay: `${index * 150}ms`,
+            animationDelay: `${index * 70}ms`
           }"
         >
           {{ tile.letter }}
@@ -235,12 +235,12 @@ function genResultGrid() {
 #board {
   display: grid;
   grid-template-rows: repeat(11, 1fr);
-  grid-gap: 5px;
+  grid-gap: 8px;
   padding: 10px;
   box-sizing: border-box;
   --height: min(420px, calc(var(--vh, 100vh) - 310px));
   height: var(--height);
-  width: min(350px, calc(var(--height) / 11 * 14));
+  width: min(450px, calc(var(--height) / 11 * 14));
   margin: 0px auto;
 }
 .message {
@@ -288,7 +288,7 @@ function genResultGrid() {
   left: 0;
   width: 100%;
   height: 100%;
-  transition: transform 0.6s;
+  transition: transform 0.3s;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
 }

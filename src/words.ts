@@ -270,7 +270,22 @@ const answers = [
 'differential',
 'eigenfunction',
 'tensor',
-'sesquilinear'
+'sesquilinear',
+'orthogonality',
+'gradient',
+'jacobian',
+'hessian',
+'wronskian',
+'conjunct',
+'invariant',
+'laplace',
+'euler',
+'mathematics',
+'inverse',
+'preimage',
+'fractal',
+'fraction',
+'projection'
 ]
 
 const allowedGuesses = answers;
