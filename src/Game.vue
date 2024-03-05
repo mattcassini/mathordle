@@ -10,7 +10,7 @@ const answer = getWordOfTheDay()
 // Board state. Each tile is represented as { letter, state }
 const board = $ref(
   Array.from({ length: 11 }, () =>
-    Array.from({ length: 8 }, () => ({
+    Array.from({ length: 14 }, () => ({
       letter: '',
       state: LetterState.INITIAL
     }))
@@ -49,14 +49,21 @@ function onKey(key: string) {
     clearTile()
   } else if (key === 'Enter') {
     completeRow()
+  } else if (key === 'Space') {
+    fillTile(key)
   }
 }
 
 function fillTile(letter: string) {
   for (const tile of currentRow) {
     if (!tile.letter) {
+      if (letter === 'Space') {
+      tile.letter = ' '
+      break
+      } else {
       tile.letter = letter
       break
+      }
     }
   }
 }
@@ -71,9 +78,13 @@ function clearTile() {
 }
 
 function completeRow() {
-  if (currentRow.every((tile) => tile.letter)) {
-    const guess = currentRow.map((tile) => tile.letter).join('')
+  //if (currentRow.every((tile) => tile.letter)) {
+    const guessWSP = currentRow.map((tile) => tile.letter).join('')
+    console.log(guessWSP)
+    const guess = guessWSP.replace(/\s+(\w+)\s+/g, '$1');
+    console.log(guess)
     if (!allWords.includes(guess) && guess !== answer) {
+      console.log(allWords)
       shake()
       showMessage(`Not in word list`)
       return
@@ -134,10 +145,10 @@ function completeRow() {
         showMessage(answer.toUpperCase(), -1)
       }, 1600)
     }
-  } else {
-    shake()
-    showMessage('Not enough letters')
-  }
+  //} else {
+  //  shake()
+  //  showMessage('Not enough letters')
+  //}
 }
 
 function showMessage(msg: string, time = 1000) {
@@ -184,7 +195,7 @@ function genResultGrid() {
     <h1>8-WORDLE</h1>
     <a
       id="source-link"
-      href="https://github.com/mattcassini/vue-wordle"
+      href="https://github.com/mattcassini/mathordle"
       target="_blank"
       >Source</a
     >
@@ -229,7 +240,7 @@ function genResultGrid() {
   box-sizing: border-box;
   --height: min(420px, calc(var(--vh, 100vh) - 310px));
   height: var(--height);
-  width: min(350px, calc(var(--height) / 11 * 8));
+  width: min(350px, calc(var(--height) / 11 * 14));
   margin: 0px auto;
 }
 .message {
@@ -250,7 +261,7 @@ function genResultGrid() {
 }
 .row {
   display: grid;
-  grid-template-columns: repeat(8, 1fr);
+  grid-template-columns: repeat(14, 1fr);
   grid-gap: 5px;
 }
 .tile {

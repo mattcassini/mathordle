@@ -12,7 +12,8 @@ defineEmits<{
 const rows = [
   'qwertyuiop'.split(''),
   'asdfghjkl'.split(''),
-  ['Enter', ...'zxcvbnm'.split(''), 'Backspace']
+  ['Enter', ...'zxcvbnm'.split(''), 'Backspace'],
+  //['Space']
 ]
 </script>
 
