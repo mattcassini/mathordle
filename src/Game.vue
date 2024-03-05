@@ -4,13 +4,14 @@ import { getWordOfTheDay, allWords } from './words'
 import Keyboard from './Keyboard.vue'
 import { LetterState } from './types'
 
+console.log('Starting game.vue');
 // Get word of the day
 const answer = getWordOfTheDay()
 
 // Board state. Each tile is represented as { letter, state }
 const board = $ref(
-  Array.from({ length: 6 }, () =>
-    Array.from({ length: 5 }, () => ({
+  Array.from({ length: 11 }, () =>
+    Array.from({ length: 8 }, () => ({
       letter: '',
       state: LetterState.INITIAL
     }))
@@ -80,6 +81,7 @@ function completeRow() {
     }
 
     const answerLetters: (string | null)[] = answer.split('')
+    
     // first pass: mark correct ones
     currentRow.forEach((tile, i) => {
       if (answerLetters[i] === tile.letter) {
@@ -87,6 +89,7 @@ function completeRow() {
         answerLetters[i] = null
       }
     })
+    
     // second pass: mark the present
     currentRow.forEach((tile) => {
       if (!tile.state && answerLetters.includes(tile.letter)) {
@@ -108,7 +111,7 @@ function completeRow() {
     })
 
     allowInput = false
-    if (currentRow.every((tile) => tile.state === LetterState.CORRECT)) {
+    if (currentRow.every((tile) => tile.state === LetterState.CORRECT || tile.state === LetterState.CORRECTDUPE)) {
       // yay!
       setTimeout(() => {
         grid = genResultGrid()
@@ -179,7 +182,7 @@ function genResultGrid() {
     </div>
   </Transition>
   <header>
-    <h1>VVORDLE</h1>
+    <h1>8-WORDLE</h1>
     <a
       id="source-link"
       href="https://github.com/yyx990803/vue-wordle"
@@ -221,13 +224,13 @@ function genResultGrid() {
 <style scoped>
 #board {
   display: grid;
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-rows: repeat(11, 1fr);
   grid-gap: 5px;
   padding: 10px;
   box-sizing: border-box;
   --height: min(420px, calc(var(--vh, 100vh) - 310px));
   height: var(--height);
-  width: min(350px, calc(var(--height) / 6 * 5));
+  width: min(350px, calc(var(--height) / 11 * 8));
   margin: 0px auto;
 }
 .message {
@@ -248,7 +251,7 @@ function genResultGrid() {
 }
 .row {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(8, 1fr);
   grid-gap: 5px;
 }
 .tile {
