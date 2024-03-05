@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { LetterState } from './types'
 
-console.log('Starting Keyboard.vue')
 defineProps<{
   letterStates: Record<string, LetterState>
 }>()

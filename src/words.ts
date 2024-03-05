@@ -1,5 +1,4 @@
 const defaultMessage = ' Using word of the day instead.'
-console.log('Starting words.ts');
 export function getWordOfTheDay() {
   if (location.search) {
     try {

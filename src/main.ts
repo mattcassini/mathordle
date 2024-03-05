@@ -2,7 +2,6 @@ import { createApp } from 'vue'
 import Game from './Game.vue'
 import './game.css'
 //import * as fs from 'fs'
-console.log('Starting main.ts')
 // resize for scaling the board size
 window.addEventListener('resize', onResize)
 // set size on startup

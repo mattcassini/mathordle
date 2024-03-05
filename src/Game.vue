@@ -4,7 +4,6 @@ import { getWordOfTheDay, allWords } from './words'
 import Keyboard from './Keyboard.vue'
 import { LetterState } from './types'
 
-console.log('Starting game.vue');
 // Get word of the day
 const answer = getWordOfTheDay()
 
@@ -185,7 +184,7 @@ function genResultGrid() {
     <h1>8-WORDLE</h1>
     <a
       id="source-link"
-      href="https://github.com/yyx990803/vue-wordle"
+      href="https://github.com/mattcassini/vue-wordle"
       target="_blank"
       >Source</a
     >
