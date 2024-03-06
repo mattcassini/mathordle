@@ -41,6 +41,39 @@ onUnmounted(() => {
   window.removeEventListener('keyup', onKeyup)
 })
 
+
+function shareContent(score: num, grid: string) {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Share',
+            text: "Score: ".concat(score, "/11 \n", grid),
+            url: ' ',
+        })
+        .then(() => console.log('Shared successfully'))
+        .catch((error) => console.error('Error sharing:', error));
+    } else {
+        console.log('Web Share API not supported.');
+    }
+}
+
+//let grid: string = '';
+
+let score: num = 0;
+// Create the share button programmatically
+const shareButton = document.createElement('button');
+shareButton.textContent = 'Share';
+shareButton.style.backgroundColor = '#6aaa64'; //Green
+shareButton.style.color = 'white'; // White text color
+shareButton.style.fontFamily = 'Roboto, sans-serif'; // Font family
+shareButton.style.padding = '15px 25px'; // Increased padding
+shareButton.style.borderRadius = '10px'; // Rounded corners
+shareButton.addEventListener('click', () => {
+    shareContent(score,grid);
+});
+
+// Add the share button to the document
+//document.body.appendChild(shareButton);
+
 function onKey(key: string) {
   if (!allowInput) return
   if (/^[a-zA-Z]$/.test(key)) {
@@ -76,6 +109,7 @@ function clearTile() {
     }
   }
 }
+
 
 function completeRow() {
   //if (currentRow.every((tile) => tile.letter)) {
@@ -128,7 +162,8 @@ function completeRow() {
     if (guessWSP === answer) {
       // yay!
       setTimeout(() => {
-        grid = genResultGrid()
+        grid = genResultGrid();
+	score = currentRowIndex + 1;
         showMessage(
           ['Genius', 'Genius', 'Brilliant', 'Magnificent', 'Incredible', 'Impressive', 'Awesome','Splendid', 'Great', 'Good job','Phew'][
             currentRowIndex
@@ -136,6 +171,7 @@ function completeRow() {
           -1
         )
         success = true
+	document.body.appendChild(shareButton);
       }, 1600)
     } else if (currentRowIndex < board.length - 1) {
       // go the next row
