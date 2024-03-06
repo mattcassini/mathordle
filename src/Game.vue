@@ -79,10 +79,10 @@ function clearTile() {
 
 function completeRow() {
   //if (currentRow.every((tile) => tile.letter)) {
+    console.log(currentRow)
+    //console.log(currentRow.map(tile.letter))
     const guessWSP = currentRow.map((tile) => tile.letter).join('')
-    console.log(guessWSP)
     const guess = guessWSP.replace(/\s+(\w+)\s+/g, '$1');
-    console.log(guess)
     if (!allWords.includes(guess) && guess !== answer) {
       console.log(allWords)
       shake()
@@ -121,12 +121,12 @@ function completeRow() {
     })
 
     allowInput = false
-    if (currentRow.every((tile) => tile.state === LetterState.CORRECT || tile.state === LetterState.CORRECT)) {
+    if (currentRow.map((tile) => tile.letter).join()) === answer) {
       // yay!
       setTimeout(() => {
         grid = genResultGrid()
         showMessage(
-          ['Genius', 'Magnificent', 'Impressive', 'Splendid', 'Great', 'Phew'][
+          ['Genius', 'Genius', 'Brilliant', 'Magnificent', 'Incredible', 'Impressive', 'Awesome','Splendid', 'Great', 'Good job','Phew'][
             currentRowIndex
           ],
           -1
@@ -192,7 +192,7 @@ function genResultGrid() {
     </div>
   </Transition>
   <header>
-    <h1>8-WORDLE</h1>
+    <h1>MATHORDLE</h1>
     <a
       id="source-link"
       href="https://github.com/mattcassini/mathordle"
