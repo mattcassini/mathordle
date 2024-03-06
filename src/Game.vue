@@ -83,6 +83,8 @@ function completeRow() {
     //console.log(currentRow.map(tile.letter))
     const guessWSP = currentRow.map((tile) => tile.letter).join('')
     const guess = guessWSP.replace(/\s+(\w+)\s+/g, '$1');
+    //console.log(guess)
+    //console.log(answer)
     if (!allWords.includes(guess) && guess !== answer) {
       console.log(allWords)
       shake()
@@ -121,7 +123,9 @@ function completeRow() {
     })
 
     allowInput = false
-    if (currentRow.map((tile) => tile.letter).join()) === answer) {
+    //console.log(currentRow.map((tile) => tile.letter).join())
+    //console.log(guessWSP)
+    if (guessWSP === answer) {
       // yay!
       setTimeout(() => {
         grid = genResultGrid()
@@ -148,8 +152,8 @@ function completeRow() {
   //} else {
   //  shake()
   //  showMessage('Not enough letters')
-  //}
-}
+  }
+//}
 
 function showMessage(msg: string, time = 1000) {
   message = msg
